@@ -1,5 +1,6 @@
 package com.code4socialgood.code4socialgood;
 
+import android.net.Network;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,14 +22,40 @@ public class MainActivity extends AppCompatActivity {
         mGetProjectsDataTextView = (TextView) findViewById(R.id.tv_getProjectsJSON);
     }
 
-    private void getTheProjectsData(){
+    private void getProjectsData(){
         String projectsQuery = "http://dev-api.code4socialgood.org/api/projects";
         URL projectsURL = NetworkUtils.buildURL(projectsQuery);
         mGetProjectsDataTextView.setText(projectsURL.toString());
-        new GetProjectsTask().execute(projectsURL);
+        new ProjectsDataAsync().execute(projectsURL);
     }
 
-    public class GetProjectsTask extends AsyncTask<URL,Void, String>{
+    private void getOrganizationsData(){
+        String organizationsQuery = "http://dev-api.code4socialgood.org/api/organizations";
+        URL organizationsURL = NetworkUtils.buildURL(organizationsQuery);
+        mGetProjectsDataTextView.setText(organizationsURL.toString());
+        new OrganizationsDataAsync().execute(organizationsURL);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    //Comment out the data method call you want to test as the Get Data menu item is bound here.
+    //If you find more than one uncommented the text will be overwritten and still pull data I would not recommend using this on Cellular.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemClicked = item.getItemId();
+        if(itemClicked == item.getItemId()){
+            //getProjectsData();
+            getOrganizationsData();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    //Temp class used for testing getting Projects data asynchronously.
+    public class ProjectsDataAsync extends AsyncTask<URL,Void, String>{
 
         @Override
         protected String doInBackground(URL... urls) {
@@ -42,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
             return projectsResults;
         }
 
-        //Not Implemented Yet
         @Override
         protected void onPostExecute(String s) {
             if(s != null && !s.equals("")){
@@ -51,20 +77,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //Not yet implemented
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+    //Temp class used for testing getting Organizations data asynchronously.
+    public class OrganizationsDataAsync extends AsyncTask<URL, Void, String>{
+        @Override
+        protected String doInBackground(URL... urls) {
+            URL organizationsURL = urls[0];
+            String organizationsResults = null;
+            try{
+                organizationsResults = NetworkUtils.getResponseFromHttpUrl(organizationsURL);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
 
-    //Not yet implemented
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int itemClicked = item.getItemId();
-        if(itemClicked == item.getItemId()){
-            getTheProjectsData();
+            return organizationsResults;
         }
-        return super.onOptionsItemSelected(item);
+
+        @Override
+        protected void onPostExecute(String s) {
+            if(s != null && !s.equals("")){
+                mGetProjectsDataTextView.setText(s);
+            }
+        }
     }
 }
