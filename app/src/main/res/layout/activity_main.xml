@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +8,7 @@
     tools:context="com.code4socialgood.code4socialgood.MainActivity">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp">
@@ -17,5 +18,21 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"/>
     </ScrollView>
+    <EditText
+        android:id="@+id/etUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textSize="18sp"
+        android:hint="enter url(ex: http://dev-api.code4socialgood.org/api/projects) "/>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/btnGetData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etUrl"
+        android:onClick="getData"
+        android:text="Get Data"
+        android:visibility="gone" />
+
+</RelativeLayout>
