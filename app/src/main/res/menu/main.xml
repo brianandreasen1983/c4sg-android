@@ -2,8 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_getData"
+    <item android:id="@+id/action_getProjectData"
             android:orderInCategory="1"
-            app:showAsAction="ifRoom"
-            android:title="Get Data" />
+            app:showAsAction="never"
+            android:title="Get Project Data" />
+    <item android:id="@+id/action_getOrganizationsData"
+        android:orderInCategory="1"
+        app:showAsAction="never"
+        android:title="Get Organization Data" />
+    <item android:id="@+id/action_getUserData"
+        android:orderInCategory="1"
+        app:showAsAction="never"
+        android:title="Get User Data" />
+    <item android:id="@+id/action_getSkills"
+        android:orderInCategory="1"
+        app:showAsAction="never"
+        android:title="Get Skills" />
+    <item android:id="@+id/action_getData"
+        android:orderInCategory="1"
+        app:showAsAction="never"
+        android:title="Get Data By URL" />
 </menu>
