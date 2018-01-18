@@ -2,6 +2,7 @@ package com.code4socialgood.code4socialgood;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,31 +18,33 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mGetProjectsDataTextView;
+    private TextView tvDisplayData;
     private EditText etUrl;
     private Button btnGetData;
+    private TextView tvErrorMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mGetProjectsDataTextView = (TextView) findViewById(R.id.tv_getProjectsJSON);
+        tvDisplayData = (TextView) findViewById(R.id.tv_getProjectsJSON);
+        tvErrorMessage = (TextView) findViewById(R.id.tv_errorMsg);
         etUrl =(EditText) findViewById(R.id.etUrl);
         btnGetData=(Button)findViewById(R.id.btnGetData);
     }
 
     public void getData(View view){
-        String query =etUrl.getText().toString();
-        if(query!=null){
+        String query = etUrl.getText().toString();
+        if(isValidURL(query)){
             etUrl.setVisibility(View.GONE);
             etUrl.setText("");
             btnGetData.setVisibility(View.GONE);
-            mGetProjectsDataTextView.setVisibility(View.VISIBLE);
+            tvDisplayData.setVisibility(View.VISIBLE);
+            tvErrorMessage.setVisibility(View.INVISIBLE);
             getDataAsync(query);
         }else{
-            etUrl.setHint("Please enter Url");
+            onURLError();
         }
-
     }
 
     /**
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void getDataAsync(String query){
         URL url = NetworkUtils.buildURL(query);
-        mGetProjectsDataTextView.setText(url.toString());
+        tvDisplayData.setText(url.toString());
         new DataAsync().execute(url);
     }
 
@@ -59,8 +62,28 @@ public class MainActivity extends AppCompatActivity {
         getDataAsync(query);
     }
 
+    private void getProjectsHeroes(){
+        String query = "http://dev-api.code4socialgood.org/api/projects/heroes";
+        getDataAsync(query);
+    }
+
+    private void getProjectsJobTitles(){
+        String query = "http://dev-api.code4socialgood.org/api/projects/jobTitles";
+        getDataAsync(query);
+    }
+
     private void getOrganizationsData(){
         String query = "http://dev-api.code4socialgood.org/api/organizations";
+        getDataAsync(query);
+    }
+
+    private void getOrganizationsTotalCountries(){
+        String query = "http://dev-api.code4socialgood.org/api/organizations/countries/total";
+        getDataAsync(query);
+    }
+
+    private void getStories(){
+        String query = "http://dev-api.code4socialgood.org/api/stories";
         getDataAsync(query);
     }
 
@@ -74,6 +97,20 @@ public class MainActivity extends AppCompatActivity {
         getDataAsync(query);
     }
 
+    private Boolean isValidURL(String query){
+        if (query.contains("http://dev-api.code4socialgood.org/api/")){
+            return true;
+        }
+        else{
+            onURLError();
+            return false;
+        }
+    }
+
+    private void onURLError(){
+        tvErrorMessage.setText("You must provide a valid URL.");
+        tvErrorMessage.setVisibility(View.VISIBLE);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -81,9 +118,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //Comment out the data method call you want to test as the Get Data menu item is bound here.
-    //If you find more than one uncommented the text will be overwritten and still pull data I would not recommend using this on Cellular.
-    //you select any menu item that will be displayed
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemClicked = item.getItemId();
@@ -101,41 +135,15 @@ public class MainActivity extends AppCompatActivity {
                 getSkills();
                 break;
             case R.id.action_getData:
-                mGetProjectsDataTextView.setVisibility(View.GONE);
+                tvDisplayData.setVisibility(View.GONE);
                 etUrl.setVisibility(View.VISIBLE);
                 btnGetData.setVisibility(View.VISIBLE);
                 break;
 
         }
-      /*  if(itemClicked == item.getItemId()){
-            //getProjectsData();
-            getOrganizationsData();
-        }*/
+
         return super.onOptionsItemSelected(item);
     }
-
-    //Temp class used for testing getting Projects data asynchronously.
-   /* public class ProjectsDataAsync extends AsyncTask<URL,Void, String>{
-
-        @Override
-        protected String doInBackground(URL... urls) {
-            URL projectsURL = urls[0];
-            String projectsResults = null;
-            try{
-                projectsResults = NetworkUtils.getResponseFromHttpUrl(projectsURL);
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-            return projectsResults;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            if(s != null && !s.equals("")){
-                mGetProjectsDataTextView.setText(s);
-            }
-        }
-    }*/
 
     //Temp class used for testing getting Organizations data asynchronously.
     public class DataAsync extends AsyncTask<URL, Void, String>{
@@ -155,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             if(s != null && !s.equals("")){
-                mGetProjectsDataTextView.setText(s);
+                tvDisplayData.setText(s);
             }
         }
     }

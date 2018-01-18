@@ -25,6 +25,12 @@
         android:visibility="gone"
         android:textSize="18sp"
         android:hint="enter url(ex: http://dev-api.code4socialgood.org/api/projects) "/>
+    <TextView
+        android:id="@+id/tv_errorMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:textSize="18sp"/>
 
     <Button
         android:id="@+id/btnGetData"
