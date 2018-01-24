@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Code4SocialGood</string>
+    <string name="connection_error">There is no Internet connection. Please connect to Internet the and try again.</string>
+    <string name="URL_error">Please provide a valid URL.</string>
+    <string name="cs4gDevURL">http://dev-api.code4socialgood.org/api/</string>
+    <string name="orgDataQueryURL">http://dev-api.code4socialgood.org/api/organizations</string>
+    <string name="projectDataQueryURL">http://dev-api.code4socialgood.org/api/projects</string>
+    <string name="userDataQueryURL">http://dev-api.code4socialgood.org/api/users</string>
+    <string name="skillsDataQueryURL">http://dev-api.code4socialgood.org/api/skills</string>
+    <string name="projectHeroesURL">http://dev-api.code4socialgood.org/api/projects/heroes</string>
+    <string name="projectJobTitlesURL">http://dev-api.code4socialgood.org/api/projects/jobTitles</string>
+    <string name="organizationTotalCountriesURL">http://dev-api.code4socialgood.org/api/organizations/countries/total</string>
+    <string name="storiesURL">http://dev-api.code4socialgood.org/api/stories</string>
 </resources>

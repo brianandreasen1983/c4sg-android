@@ -1,7 +1,12 @@
 package com.code4socialgood.code4socialgood;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,33 +20,44 @@ import com.code4socialgood.code4socialgood.utilities.NetworkUtils;
 import java.io.IOException;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
-    private TextView mGetProjectsDataTextView;
+    private TextView tvDisplayData;
     private EditText etUrl;
     private Button btnGetData;
+    private TextView tvErrorMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mGetProjectsDataTextView = (TextView) findViewById(R.id.tv_getProjectsJSON);
+        tvDisplayData = (TextView) findViewById(R.id.tv_getProjectsJSON);
+        tvErrorMessage = (TextView) findViewById(R.id.tv_errorMsg);
         etUrl =(EditText) findViewById(R.id.etUrl);
         btnGetData=(Button)findViewById(R.id.btnGetData);
     }
 
-    public void getData(View view){
-        String query =etUrl.getText().toString();
-        if(query!=null){
-            etUrl.setVisibility(View.GONE);
-            etUrl.setText("");
-            btnGetData.setVisibility(View.GONE);
-            mGetProjectsDataTextView.setVisibility(View.VISIBLE);
-            getDataAsync(query);
-        }else{
-            etUrl.setHint("Please enter Url");
-        }
+    private boolean isOnline(){
+        ConnectivityManager connManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
+    }
 
+    private void showConnectionError(){
+        tvDisplayData.setText(getString(R.string.connection_error));
+    }
+
+    public void getData(View view){
+         String query = etUrl.getText().toString();
+         if(isValidURL(query)){
+             etUrl.setVisibility(View.GONE);
+             etUrl.setText("");
+             btnGetData.setVisibility(View.GONE);
+             tvDisplayData.setVisibility(View.VISIBLE);
+             getDataAsync(query);
+         }else{
+             onURLError();
+        }
     }
 
     /**
@@ -49,29 +65,44 @@ public class MainActivity extends AppCompatActivity {
      * @param query
      */
     private void getDataAsync(String query){
-        URL url = NetworkUtils.buildURL(query);
-        mGetProjectsDataTextView.setText(url.toString());
-        new DataAsync().execute(url);
+            URL url = NetworkUtils.buildURL(query);
+            tvDisplayData.setText(url.toString());
+            new DataAsync().execute(url);
     }
 
-    private void getProjectsData(){
-        String query = "http://dev-api.code4socialgood.org/api/projects";
+    private void getProjectsHeroes(){
+        String query = getString(R.string.projectHeroesURL);
         getDataAsync(query);
     }
 
-    private void getOrganizationsData(){
-        String query = "http://dev-api.code4socialgood.org/api/organizations";
+    private void getProjectsJobTitles(){
+        String query = getString(R.string.projectJobTitlesURL);
         getDataAsync(query);
     }
 
-    private void getUserData(){
-        String query = "http://dev-api.code4socialgood.org/api/users";
+    private void getOrganizationsTotalCountries(){
+        String query = getString(R.string.organizationTotalCountriesURL);
         getDataAsync(query);
     }
 
-    private void getSkills(){
-        String query = "http://dev-api.code4socialgood.org/api/skills";
+    private void getStories(){
+        String query = getString(R.string.storiesURL);
         getDataAsync(query);
+    }
+
+    private Boolean isValidURL(String query){
+        if (query.contains(getString(R.string.cs4gDevURL))){
+            return true;
+        }
+        else{
+            onURLError();
+            return false;
+        }
+    }
+
+    private void onURLError(){
+        tvErrorMessage.setText(R.string.URL_error);
+        tvErrorMessage.setVisibility(View.VISIBLE);
     }
 
 
@@ -81,64 +112,56 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //Comment out the data method call you want to test as the Get Data menu item is bound here.
-    //If you find more than one uncommented the text will be overwritten and still pull data I would not recommend using this on Cellular.
-    //you select any menu item that will be displayed
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemClicked = item.getItemId();
         switch (itemClicked){
             case R.id.action_getOrganizationsData:
-                getOrganizationsData();
+                if(isOnline()){
+                    String orgDataQuery = getString(R.string.orgDataQueryURL);
+                    getDataAsync(orgDataQuery);
+                }else{
+                    showConnectionError();
+                }
                 break;
             case R.id.action_getProjectData:
-                getProjectsData();
+                if(isOnline()){
+                    String projectDataQuery = getString(R.string.projectDataQueryURL);
+                    getDataAsync(projectDataQuery);
+                }else{
+                    showConnectionError();
+                }
                 break;
             case R.id.action_getUserData:
-                getUserData();
+                if(isOnline()){
+                    String userDataQuery = getString(R.string.userDataQueryURL);
+                    getDataAsync(userDataQuery);
+                }else{
+                    showConnectionError();
+                }
                 break;
             case R.id.action_getSkills:
-                getSkills();
+                if(isOnline()){
+                    String skillsDataQuery = getString(R.string.skillsDataQueryURL);
+                    getDataAsync(skillsDataQuery);
+                }else{
+                    showConnectionError();
+                }
                 break;
             case R.id.action_getData:
-                mGetProjectsDataTextView.setVisibility(View.GONE);
+                tvDisplayData.setVisibility(View.GONE);
                 etUrl.setVisibility(View.VISIBLE);
                 btnGetData.setVisibility(View.VISIBLE);
                 break;
 
         }
-      /*  if(itemClicked == item.getItemId()){
-            //getProjectsData();
-            getOrganizationsData();
-        }*/
+
         return super.onOptionsItemSelected(item);
     }
 
-    //Temp class used for testing getting Projects data asynchronously.
-   /* public class ProjectsDataAsync extends AsyncTask<URL,Void, String>{
-
-        @Override
-        protected String doInBackground(URL... urls) {
-            URL projectsURL = urls[0];
-            String projectsResults = null;
-            try{
-                projectsResults = NetworkUtils.getResponseFromHttpUrl(projectsURL);
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-            return projectsResults;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            if(s != null && !s.equals("")){
-                mGetProjectsDataTextView.setText(s);
-            }
-        }
-    }*/
-
     //Temp class used for testing getting Organizations data asynchronously.
     public class DataAsync extends AsyncTask<URL, Void, String>{
+
         @Override
         protected String doInBackground(URL... urls) {
             URL url = urls[0];
@@ -148,14 +171,13 @@ public class MainActivity extends AppCompatActivity {
             }catch (IOException e){
                 e.printStackTrace();
             }
-
             return results;
         }
 
         @Override
         protected void onPostExecute(String s) {
             if(s != null && !s.equals("")){
-                mGetProjectsDataTextView.setText(s);
+                tvDisplayData.setText(s);
             }
         }
     }
