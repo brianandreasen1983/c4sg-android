@@ -1,13 +1,14 @@
 package com.code4socialgood.code4socialgood;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,10 +16,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.code4socialgood.code4socialgood.Adapter.ProjectRecyclerViewAdapter;
+import com.code4socialgood.code4socialgood.models.Project;
 import com.code4socialgood.code4socialgood.utilities.NetworkUtils;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -26,15 +36,27 @@ public class MainActivity extends AppCompatActivity{
     private EditText etUrl;
     private Button btnGetData;
     private TextView tvErrorMessage;
+    private AsyncHttpClient client;
+    private ArrayList<Project> projects;
+    private RecyclerView recycler;
+    private ProjectRecyclerViewAdapter projectRecyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initialize();
+
+    }
+
+    private void initialize(){
         tvDisplayData = (TextView) findViewById(R.id.tv_getProjectsJSON);
         tvErrorMessage = (TextView) findViewById(R.id.tv_errorMsg);
         etUrl =(EditText) findViewById(R.id.etUrl);
         btnGetData=(Button)findViewById(R.id.btnGetData);
+        client = new AsyncHttpClient();
+        projects = new ArrayList<>();
+        recycler = (RecyclerView)findViewById(R.id.recyclerView);
     }
 
     private boolean isOnline(){
@@ -50,11 +72,8 @@ public class MainActivity extends AppCompatActivity{
     public void getData(View view){
          String query = etUrl.getText().toString();
          if(isValidURL(query)){
-             etUrl.setVisibility(View.GONE);
-             etUrl.setText("");
-             btnGetData.setVisibility(View.GONE);
-             tvDisplayData.setVisibility(View.VISIBLE);
              getDataAsync(query);
+             displayResult();
          }else{
              onURLError();
         }
@@ -105,6 +124,35 @@ public class MainActivity extends AppCompatActivity{
         tvErrorMessage.setVisibility(View.VISIBLE);
     }
 
+    private void displayResult(){
+        tvErrorMessage.setVisibility(View.GONE);
+        etUrl.setVisibility(View.GONE);
+        etUrl.setText("");
+        btnGetData.setVisibility(View.GONE);
+        tvDisplayData.setVisibility(View.VISIBLE);
+        recycler.setVisibility(View.GONE);
+    }
+
+    public void getProjects(){
+
+        projectRecyclerViewAdapter = new ProjectRecyclerViewAdapter(this,projects);
+        tvDisplayData.setVisibility(View.GONE);
+        recycler.setVisibility(View.VISIBLE);
+        recycler.setAdapter(projectRecyclerViewAdapter);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
+        client.get(getString(R.string.projectDataQueryURL),new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                JSONArray projectJsonResult = null;
+                projectJsonResult = response;
+                projects.addAll(Project.fromJsonArray(projectJsonResult));
+                projectRecyclerViewAdapter.notifyDataSetChanged();
+                Log.d("Debug", projects.toString());
+
+            }
+        });
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -119,6 +167,7 @@ public class MainActivity extends AppCompatActivity{
             case R.id.action_getOrganizationsData:
                 if(isOnline()){
                     String orgDataQuery = getString(R.string.orgDataQueryURL);
+                    displayResult();
                     getDataAsync(orgDataQuery);
                 }else{
                     showConnectionError();
@@ -127,7 +176,9 @@ public class MainActivity extends AppCompatActivity{
             case R.id.action_getProjectData:
                 if(isOnline()){
                     String projectDataQuery = getString(R.string.projectDataQueryURL);
+                    displayResult();
                     getDataAsync(projectDataQuery);
+                    getProjects();
                 }else{
                     showConnectionError();
                 }
@@ -135,6 +186,7 @@ public class MainActivity extends AppCompatActivity{
             case R.id.action_getUserData:
                 if(isOnline()){
                     String userDataQuery = getString(R.string.userDataQueryURL);
+                    displayResult();
                     getDataAsync(userDataQuery);
                 }else{
                     showConnectionError();
@@ -143,6 +195,7 @@ public class MainActivity extends AppCompatActivity{
             case R.id.action_getSkills:
                 if(isOnline()){
                     String skillsDataQuery = getString(R.string.skillsDataQueryURL);
+                    displayResult();
                     getDataAsync(skillsDataQuery);
                 }else{
                     showConnectionError();

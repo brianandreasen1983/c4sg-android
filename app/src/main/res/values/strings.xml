@@ -11,4 +11,8 @@
     <string name="projectJobTitlesURL">http://dev-api.code4socialgood.org/api/projects/jobTitles</string>
     <string name="organizationTotalCountriesURL">http://dev-api.code4socialgood.org/api/organizations/countries/total</string>
     <string name="storiesURL">http://dev-api.code4socialgood.org/api/stories</string>
+    <string name="description_label">Description</string>
+    <string name="posted_label">Posted:</string>
+    <string name="location_label">Location:</string>
+    <string name="image_logo">image</string>
 </resources>
