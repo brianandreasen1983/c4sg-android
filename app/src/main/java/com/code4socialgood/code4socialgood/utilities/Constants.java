@@ -18,6 +18,7 @@ public class Constants {
     public static final String PROJECT_ORGANIZATION_NAME="organizationName";
     public static final String PROJECT_ORGANIZATION_LOGO_URL="organizationLogoUrl";
     public static final String PROJECT_JOB_TITLE_ID="jobTitleId";
+    public static final String PROJECT_LOCATION="location";
 
 
 

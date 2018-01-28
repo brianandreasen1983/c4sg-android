@@ -130,11 +130,14 @@ public class MainActivity extends AppCompatActivity{
         etUrl.setText("");
         btnGetData.setVisibility(View.GONE);
         tvDisplayData.setVisibility(View.VISIBLE);
+        recycler.setVisibility(View.GONE);
     }
 
     public void getProjects(){
 
         projectRecyclerViewAdapter = new ProjectRecyclerViewAdapter(this,projects);
+        tvDisplayData.setVisibility(View.GONE);
+        recycler.setVisibility(View.VISIBLE);
         recycler.setAdapter(projectRecyclerViewAdapter);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         client.get(getString(R.string.projectDataQueryURL),new JsonHttpResponseHandler(){
