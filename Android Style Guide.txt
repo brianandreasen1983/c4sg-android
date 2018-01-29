@@ -1,0 +1,144 @@
+Code 4 Social Good - Android App Style Guide
+
+Sourced from Google's Java Style Guide: https://google.github.io/styleguide/javaguide.html#s3.4.1-one-top-level-class
+
+1. File names:
+
+ - Classes -
+
+Generally classes should have the same name as the main class it contains. Class names should be Pascal-cased
+
+E.g ScannerUtil.java, NetworkController.java
+
+ - Activities -
+
+Activities should also use Pascal case and should match the xml file (in reverse). It should postfixed with 'Activity' to specify
+that it's an activity.
+
+E.g activity_main.xml should have a MainActivity.java file.
+
+
+- Fragments -
+
+Fragments' Java files should be named using Pascal casing and should be postfixed with 'Fragment' to specify that it's a fragment.
+Example LoginFragment.java
+
+The xml file should follow the default Android Studio naming style. 
+Example fragment_login.xml
+
+- XML Files -
+XML files should be named with an underscore between each word. Generally xml files are in small caps.
+
+Example: system_setup.xml
+
+
+2. Packages
+
+Packages should be organized by feature NOT by type. For example LoginFragment may be in the 'authentication' package because it's
+part of the authentication feature. It should not be in a 'Fragments' package.
+
+3. Variables
+All variables in Java files should be written in camel case. 
+Example: userName
+
+Class member variables should be prefixed with an underscore
+Example: _userName
+
+Generally variable names should be descriptive enough that you should not need
+any comment to describe it.
+
+Android views
+Prefix TextView variables with "tv" and EditText variables with "et"
+Example: TextView tvTitle
+         EditText etEmail
+
+3. Grouping Overloaded Methods:
+When methods or constructors are overloaded, they should appear sequentially, with no other method or member variables between them.
+
+4. Braces:
+Use braces with for if, else, for, and while statements, even if the statement is empty or only has one line of code
+Example:
+
+Do:
+if(done){
+	cleanUp();
+}
+
+Don't do:
+if(done)
+    cleanUp();
+
+4.1 Line breaks after the closing brace:
+There should be a line break after the closing brace, only if the closing brace terminates a statement or method. There should be no line
+break if the closing brace is followed by and else statement etc.
+
+Example:
+Do:
+if(done){
+	// clean up stuff
+} else {
+	// do some other stuff instead
+}
+
+
+Don't do:
+if(done){
+	// clean up stuff
+}
+else {
+	// do some other stuff instead
+}
+
+Do:
+try {
+	// do something that might explode
+} catch(Exception e){
+	// don't let it explode
+}
+
+Do: Note that this is not followed by an else statement, so the closing brace essentially terminates this statement.
+if(done){
+	// do stuff
+}
+
+
+
+5. Spacing Between Methods:
+Methods should be separated by exactly two empty lines.
+
+Example:
+
+void doSomething(){
+	// do something here
+}
+
+
+void doSomeOtherThing(){
+	// do some other thing here
+}
+
+6. Line Wrapping
+The maximum number of characters per line is 100. After 100 characters you should wrap the statment into another line.
+You can line-wrap the code before you hit 100 characters if you feel like doing so will make the code more readable it more readable.
+Indent continuation lines at least +4 spaces from the original line.
+
+7. Variable Declaration
+Delcare one varibale per line
+
+Do: int a;
+Don't do: int a, b;
+
+Try to declare variables as close to where there're used as possible.
+
+7. Overrides
+Always use @Overrides when you override methods
+
+8. Java Docs
+Write Javadocs for all non-trivial public classes and methods.
+
+9. Comments
+Yes. Please comment your code if you feel like it's non-trivial.
+
+
+
+
