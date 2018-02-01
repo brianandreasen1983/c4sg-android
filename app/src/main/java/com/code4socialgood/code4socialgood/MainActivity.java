@@ -18,11 +18,13 @@ import android.widget.TextView;
 
 import com.code4socialgood.code4socialgood.Adapter.ProjectRecyclerViewAdapter;
 import com.code4socialgood.code4socialgood.models.Project;
+import com.code4socialgood.code4socialgood.models.Volunteer;
 import com.code4socialgood.code4socialgood.utilities.NetworkUtils;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity{
     private TextView tvErrorMessage;
     private AsyncHttpClient client;
     private ArrayList<Project> projects;
+    private ArrayList<Volunteer> volunteers;
     private RecyclerView recycler;
     private ProjectRecyclerViewAdapter projectRecyclerViewAdapter;
 
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity{
         btnGetData=(Button)findViewById(R.id.btnGetData);
         client = new AsyncHttpClient();
         projects = new ArrayList<>();
+        volunteers = new ArrayList<>();
         recycler = (RecyclerView)findViewById(R.id.recyclerView);
     }
 
@@ -154,6 +158,20 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
+    public void getVolunteers() {
+        client.get(getString(R.string.userDataQueryURL),new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                JSONArray volunteerJsonResult = null;
+                volunteerJsonResult = response;
+                volunteers.addAll(Volunteer.fromJsonArray(volunteerJsonResult));
+//                volunteerRecyclerViewAdapter.notifyDataSetChanged();
+                Log.d("Debug", volunteers.toString());
+            }
+        });
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -188,6 +206,7 @@ public class MainActivity extends AppCompatActivity{
                     String userDataQuery = getString(R.string.userDataQueryURL);
                     displayResult();
                     getDataAsync(userDataQuery);
+                    getVolunteers();
                 }else{
                     showConnectionError();
                 }
