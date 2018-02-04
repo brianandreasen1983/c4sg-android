@@ -42,7 +42,6 @@ public class Volunteer {
     private String updatedTime;
     private int jobTitleId;
 
-
     public Volunteer(JSONObject jsonObject) throws JSONException {
         this.id = jsonObject.getInt(Constants.VOLUNTEER_ID);
         this.userName = jsonObject.getString(Constants.VOLUNTEER_USER_NAME);
@@ -95,11 +94,25 @@ public class Volunteer {
 
     public String getLastName() { return this.lastName; }
 
+    public String getName() { return this.firstName + " " + this.lastName; }
+
     public String getEmail() { return this.email; }
 
     public String getState() { return this.state; }
 
     public String getCountry() { return this.country; }
+
+    public String getLocation() {
+        String result = "";
+        if(this.state.length() > 0 && this.country.length() > 0) {
+            result = this.state + ", " + this.country;
+        } else if(this.state.length() > 0) {
+            result = this.state;
+        } else if(this.country.length() > 0) {
+            result = this.country;
+        }
+        return result;
+    }
 
     public double getLatitude() { return this.latitude; }
 

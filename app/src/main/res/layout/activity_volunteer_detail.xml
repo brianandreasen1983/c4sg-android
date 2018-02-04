@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.code4socialgood.code4socialgood.Activity.VolunteerDetailActivity">
+
+    <ImageView
+        android:id="@+id/imAvatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/placeholder"
+        android:layout_margin="@dimen/margin"
+        android:contentDescription="@string/image_logo" />
+    <TextView
+        android:id="@+id/tvNameVolunteer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@id/imAvatar"
+        android:layout_toRightOf="@id/imAvatar"
+        tools:text="Name"
+        android:layout_margin="@dimen/margin"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_color"/>
+    <TextView
+        android:id="@+id/tvTitleLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/imAvatar"
+        android:layout_toRightOf="@id/imAvatar"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/title_label"
+        android:textColor="@color/text_color"
+        android:layout_below="@id/tvNameVolunteer"/>
+
+    <TextView
+        android:id="@+id/tvTitleVolunteer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvLocationVolunteer"
+        android:layout_alignStart="@+id/tvLocationVolunteer"
+        android:layout_below="@+id/tvNameVolunteer"
+        android:textColor="@color/text_color"
+        tools:text="Technical Writer" />
+    <TextView
+        android:id="@+id/tvLocationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/imAvatar"
+        android:layout_toRightOf="@id/imAvatar"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginStart="@dimen/margin"
+        android:text="@string/location_label"
+        android:textColor="@color/text_color"
+        android:layout_below="@id/tvTitleLabel"/>
+    <TextView
+        android:id="@+id/tvLocationVolunteer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitleVolunteer"
+        android:layout_toEndOf="@id/tvTitleLabel"
+        android:layout_toRightOf="@id/tvTitleLabel"
+        tools:text="local"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginStart="40dp"
+        android:textColor="@color/text_color"/>
+    <TextView
+        android:id="@+id/tvIntroductionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:text="@string/introduction_label"
+        android:textColor="@color/text_color"
+        android:layout_below="@id/imAvatar"/>
+
+    <TextView
+        android:id="@+id/tvIntroductionVolunteer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvIntroductionLabel"
+        tools:text="Introduction"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_marginEnd="@dimen/margin"
+        android:layout_marginBottom="@dimen/margin"
+        android:scrollbars="vertical"/>
+
+</RelativeLayout>

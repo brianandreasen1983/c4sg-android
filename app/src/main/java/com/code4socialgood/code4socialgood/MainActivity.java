@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.code4socialgood.code4socialgood.Adapter.ProjectRecyclerViewAdapter;
+import com.code4socialgood.code4socialgood.Adapter.VolunteerRecyclerViewAdapter;
 import com.code4socialgood.code4socialgood.models.Project;
 import com.code4socialgood.code4socialgood.models.Volunteer;
 import com.code4socialgood.code4socialgood.utilities.NetworkUtils;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity{
     private ArrayList<Volunteer> volunteers;
     private RecyclerView recycler;
     private ProjectRecyclerViewAdapter projectRecyclerViewAdapter;
+    private VolunteerRecyclerViewAdapter volunteerRecyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,13 +161,19 @@ public class MainActivity extends AppCompatActivity{
 
 
     public void getVolunteers() {
+
+        volunteerRecyclerViewAdapter = new VolunteerRecyclerViewAdapter(this, volunteers);
+        tvDisplayData.setVisibility(View.GONE);
+        recycler.setVisibility(View.VISIBLE);
+        recycler.setAdapter(volunteerRecyclerViewAdapter);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
         client.get(getString(R.string.userDataQueryURL),new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 JSONArray volunteerJsonResult = null;
                 volunteerJsonResult = response;
                 volunteers.addAll(Volunteer.fromJsonArray(volunteerJsonResult));
-//                volunteerRecyclerViewAdapter.notifyDataSetChanged();
+                volunteerRecyclerViewAdapter.notifyDataSetChanged();
                 Log.d("Debug", volunteers.toString());
             }
         });

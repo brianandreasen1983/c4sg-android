@@ -14,5 +14,7 @@
     <string name="description_label">Description</string>
     <string name="posted_label">Posted:</string>
     <string name="location_label">Location:</string>
+    <string name="title_label">Title:</string>
+    <string name="introduction_label">Introduction:</string>
     <string name="image_logo">image</string>
 </resources>
