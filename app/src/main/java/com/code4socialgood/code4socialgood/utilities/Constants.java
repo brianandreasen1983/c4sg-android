@@ -4,6 +4,15 @@ package com.code4socialgood.code4socialgood.utilities;
 public class Constants {
 
     /*
+    Global Constants
+     */
+//    public static final String NAME = "name";
+//    public static final String LOCATION = "location";
+//    public static final String CITY = "city";
+//    public static final String STATE = "state";
+//    public static final String COUNTRY = "country";
+
+    /*
     Project Constants
      */
     public static final String PROJECT_ID ="id";
@@ -54,4 +63,6 @@ public class Constants {
     public static final String VOLUNTEER_CREATED_TIME = "createdTime";
     public static final String VOLUNTEER_UPDATED_TIME = "updatedTime";
     public static final String VOLUNTEER_JOB_TITLE_ID = "jobTitleId";
+    public static final String VOLUNTEER_LOCATION = "location";
+    public static final String VOLUNTEER_NAME = "name";
 }
