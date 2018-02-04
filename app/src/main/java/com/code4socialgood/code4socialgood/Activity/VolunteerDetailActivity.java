@@ -45,8 +45,8 @@ public class VolunteerDetailActivity extends AppCompatActivity {
                     .placeholder(R.drawable.placeholder)
                     .into(imAvatar);
         }
-        tvNameVolunteer.setText(intent.getStringExtra(Constants.NAME));
-        tvLocationVolunteer.setText(intent.getStringExtra(Constants.LOCATION));
+        tvNameVolunteer.setText(intent.getStringExtra(Constants.VOLUNTEER_NAME));
+        tvLocationVolunteer.setText(intent.getStringExtra(Constants.VOLUNTEER_LOCATION));
         tvTitleVolunteer.setText(intent.getStringExtra(Constants.VOLUNTEER_TITLE));
         tvIntroductionVolunteer.setText(intent.getStringExtra(Constants.VOLUNTEER_INTRODUCTION));
         tvIntroductionVolunteer.setMovementMethod(new ScrollingMovementMethod());

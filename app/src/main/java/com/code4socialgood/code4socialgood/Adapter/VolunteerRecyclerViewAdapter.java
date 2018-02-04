@@ -130,11 +130,11 @@ public class VolunteerRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
             int position = getAdapterPosition();
             if(position!= RecyclerView.NO_POSITION) {
                 Intent intent = new Intent(view.getContext(), VolunteerDetailActivity.class);
-                intent.putExtra(Constants.NAME, items.get(position).getName());
+                intent.putExtra(Constants.VOLUNTEER_NAME, items.get(position).getName());
                 intent.putExtra(Constants.VOLUNTEER_AVATAR_URL, items.get(position).getAvatarUrl());
                 intent.putExtra(Constants.VOLUNTEER_TITLE, items.get(position).getTitle());
                 intent.putExtra(Constants.VOLUNTEER_INTRODUCTION, items.get(position).getIntroduction());
-                intent.putExtra(Constants.LOCATION, items.get(position).getLocation());
+                intent.putExtra(Constants.VOLUNTEER_LOCATION, items.get(position).getLocation());
                 view.getContext().startActivity(intent);
             }
 
