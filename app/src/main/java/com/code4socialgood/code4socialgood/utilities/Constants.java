@@ -65,4 +65,13 @@ public class Constants {
     public static final String VOLUNTEER_JOB_TITLE_ID = "jobTitleId";
     public static final String VOLUNTEER_LOCATION = "location";
     public static final String VOLUNTEER_NAME = "name";
+
+
+    /*
+    Skill Constants
+     */
+    public static final String SKILL_ID = "id";
+    public static final String SKILL_NAME = "skillName";
 }
+
+
