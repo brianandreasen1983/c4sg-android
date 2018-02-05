@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.code4socialgood.code4socialgood.Adapter.ProjectRecyclerViewAdapter;
 import com.code4socialgood.code4socialgood.Adapter.VolunteerRecyclerViewAdapter;
 import com.code4socialgood.code4socialgood.models.Project;
+import com.code4socialgood.code4socialgood.models.Skill;
 import com.code4socialgood.code4socialgood.models.Volunteer;
 import com.code4socialgood.code4socialgood.utilities.NetworkUtils;
 import com.loopj.android.http.AsyncHttpClient;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity{
     private AsyncHttpClient client;
     private ArrayList<Project> projects;
     private ArrayList<Volunteer> volunteers;
+    private ArrayList<Skill> skills;
     private RecyclerView recycler;
     private ProjectRecyclerViewAdapter projectRecyclerViewAdapter;
     private VolunteerRecyclerViewAdapter volunteerRecyclerViewAdapter;
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity{
         client = new AsyncHttpClient();
         projects = new ArrayList<>();
         volunteers = new ArrayList<>();
+        skills = new ArrayList<>();
         recycler = (RecyclerView)findViewById(R.id.recyclerView);
     }
 
@@ -179,6 +182,18 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
+    public void getSkills() {
+        client.get(getString(R.string.skillsDataQueryURL),new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                JSONArray skillJsonResult = null;
+                skillJsonResult = response;
+                skills.addAll(Skill.fromJsonArray(skillJsonResult));
+                Log.d("Debug", skills.toString());
+            }
+        });
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -224,6 +239,7 @@ public class MainActivity extends AppCompatActivity{
                     String skillsDataQuery = getString(R.string.skillsDataQueryURL);
                     displayResult();
                     getDataAsync(skillsDataQuery);
+                    getSkills();
                 }else{
                     showConnectionError();
                 }
