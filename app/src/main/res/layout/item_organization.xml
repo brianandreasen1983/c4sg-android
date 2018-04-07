@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin">
+
+    <ImageView
+        android:id="@+id/imLogo"
+        android:layout_width="@dimen/logoWidth"
+        android:layout_height="@dimen/logoHeight"
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder"
+        android:layout_alignParentLeft="true"
+
+        />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imLogo"
+        android:text="Organization Name"
+        android:paddingLeft="@dimen/paddingLeft"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_color"
+        />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Organization description"
+        android:layout_below="@+id/tvName"
+        android:layout_toRightOf="@id/imLogo"
+        android:paddingLeft="@dimen/paddingLeft"
+        android:paddingTop="10dp"
+        android:textColor="@color/text_color"
+        android:maxLines="2"/>
+
+    <TextView
+        android:id="@+id/tvLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="City, Country"
+        android:textColor="@color/text_color"
+        />
+
+</RelativeLayout>
