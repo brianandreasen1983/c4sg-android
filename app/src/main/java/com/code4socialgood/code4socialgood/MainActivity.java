@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.code4socialgood.code4socialgood.Adapter.OrganizationRecyclerViewAdapter;
 import com.code4socialgood.code4socialgood.Adapter.ProjectRecyclerViewAdapter;
 import com.code4socialgood.code4socialgood.Adapter.VolunteerRecyclerViewAdapter;
 import com.code4socialgood.code4socialgood.models.Project;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity{
     private RecyclerView recycler;
     private ProjectRecyclerViewAdapter projectRecyclerViewAdapter;
     private VolunteerRecyclerViewAdapter volunteerRecyclerViewAdapter;
+    private OrganizationRecyclerViewAdapter organizationRecyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +144,27 @@ public class MainActivity extends AppCompatActivity{
         recycler.setVisibility(View.GONE);
     }
 
+    public  void  getOrganizations(){
+        organizationRecyclerViewAdapter = new OrganizationRecyclerViewAdapter(projects);
+        tvDisplayData.setVisibility(View.GONE);
+        recycler.setVisibility(View.VISIBLE);
+        recycler.setAdapter(organizationRecyclerViewAdapter);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
+        client.get(getString(R.string.projectDataQueryURL),new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                JSONArray projectJsonResult = null;
+                projectJsonResult = response;
+                projects.addAll(Project.fromJsonArray(projectJsonResult));
+                organizationRecyclerViewAdapter.notifyDataSetChanged();
+                Log.d("Debug", projects.toString());
+
+            }
+        });
+
+    }
+
+
     public void getProjects(){
 
         projectRecyclerViewAdapter = new ProjectRecyclerViewAdapter(this,projects);
@@ -210,6 +233,7 @@ public class MainActivity extends AppCompatActivity{
                     String orgDataQuery = getString(R.string.orgDataQueryURL);
                     displayResult();
                     getDataAsync(orgDataQuery);
+                    getOrganizations();
                 }else{
                     showConnectionError();
                 }

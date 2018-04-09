@@ -5,20 +5,19 @@
     android:layout_margin="@dimen/margin">
 
     <ImageView
-        android:id="@+id/imLogo"
+        android:id="@+id/imOrgLogo"
         android:layout_width="@dimen/logoWidth"
         android:layout_height="@dimen/logoHeight"
         android:scaleType="centerCrop"
         android:src="@drawable/placeholder"
         android:layout_alignParentLeft="true"
-
         />
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvOrgName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/imLogo"
+        android:layout_toRightOf="@+id/imOrgLogo"
         android:text="Organization Name"
         android:paddingLeft="@dimen/paddingLeft"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -26,19 +25,19 @@
         />
 
     <TextView
-        android:id="@+id/tvDescription"
+        android:id="@+id/tvOrgDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Organization description"
-        android:layout_below="@+id/tvName"
-        android:layout_toRightOf="@id/imLogo"
+        android:layout_below="@+id/tvOrgName"
+        android:layout_toRightOf="@id/imOrgLogo"
         android:paddingLeft="@dimen/paddingLeft"
         android:paddingTop="10dp"
         android:textColor="@color/text_color"
         android:maxLines="2"/>
 
     <TextView
-        android:id="@+id/tvLocation"
+        android:id="@+id/tvOrgLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
