@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.code4socialgood.code4socialgood.Adapter.OrganizationRecyclerViewAdapter;
 import com.code4socialgood.code4socialgood.Adapter.ProjectRecyclerViewAdapter;
 import com.code4socialgood.code4socialgood.Adapter.VolunteerRecyclerViewAdapter;
+import com.code4socialgood.code4socialgood.models.Organization;
 import com.code4socialgood.code4socialgood.models.Project;
 import com.code4socialgood.code4socialgood.models.Skill;
 import com.code4socialgood.code4socialgood.models.Volunteer;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity{
     private Button btnGetData;
     private TextView tvErrorMessage;
     private AsyncHttpClient client;
+    private ArrayList<Organization> organizations;
     private ArrayList<Project> projects;
     private ArrayList<Volunteer> volunteers;
     private ArrayList<Skill> skills;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity{
         etUrl =(EditText) findViewById(R.id.etUrl);
         btnGetData=(Button)findViewById(R.id.btnGetData);
         client = new AsyncHttpClient();
+        organizations = new ArrayList<>();
         projects = new ArrayList<>();
         volunteers = new ArrayList<>();
         skills = new ArrayList<>();
@@ -145,19 +148,18 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public  void  getOrganizations(){
-        organizationRecyclerViewAdapter = new OrganizationRecyclerViewAdapter(projects);
+        organizationRecyclerViewAdapter = new OrganizationRecyclerViewAdapter(this, organizations);
         tvDisplayData.setVisibility(View.GONE);
         recycler.setVisibility(View.VISIBLE);
         recycler.setAdapter(organizationRecyclerViewAdapter);
         recycler.setLayoutManager(new LinearLayoutManager(this));
-        client.get(getString(R.string.projectDataQueryURL),new JsonHttpResponseHandler(){
+        client.get(getString(R.string.orgDataQueryURL),new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                JSONArray projectJsonResult = null;
-                projectJsonResult = response;
-                projects.addAll(Project.fromJsonArray(projectJsonResult));
+                JSONArray organizationJsonResult = response;
+                organizations.addAll(Organization.fromJsonArray(organizationJsonResult));
                 organizationRecyclerViewAdapter.notifyDataSetChanged();
-                Log.d("Debug", projects.toString());
+                Log.d("Debug", organizations.toString());
 
             }
         });

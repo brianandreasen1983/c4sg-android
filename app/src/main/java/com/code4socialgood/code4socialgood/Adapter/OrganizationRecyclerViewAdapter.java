@@ -10,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.code4socialgood.code4socialgood.R;
+import com.code4socialgood.code4socialgood.models.Organization;
 import com.code4socialgood.code4socialgood.models.Project;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -20,12 +22,13 @@ import java.util.List;
 
 public class OrganizationRecyclerViewAdapter extends RecyclerView.Adapter<OrganizationRecyclerViewAdapter.OrganizationViewHolder> {
 
+    Context context;
+    List<Organization> organizations;
 
-    List<Project> projects;
+    public OrganizationRecyclerViewAdapter(Context context, List<Organization> organizations){
 
-    public OrganizationRecyclerViewAdapter(List<Project> projects){
-
-        this.projects = projects;
+        this.context = context;
+        this.organizations = organizations;
 
     }
 
@@ -46,12 +49,12 @@ public class OrganizationRecyclerViewAdapter extends RecyclerView.Adapter<Organi
 
     @Override
     public void onBindViewHolder(OrganizationViewHolder holder, int position) {
-        holder.bind(projects.get(position));
+        holder.bind(organizations.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return projects.size();
+        return organizations.size();
     }
 
     public class OrganizationViewHolder extends RecyclerView.ViewHolder{
@@ -71,13 +74,16 @@ public class OrganizationRecyclerViewAdapter extends RecyclerView.Adapter<Organi
 
         }
 
-        void bind(Project project){
+        void bind(Organization organization){
 
-
-            imLogo.setImageURI(Uri.parse(project.getImageUrl()));
-            tvName.setText(project.getName());
-            tvDescription.setText(project.getDescription());
-            tvLocation.setText(project.getCity() + "," + project.getCountry());
+            String image= organization.getLogoUrl();
+            if(image!=null && image.length()>0) {
+                Picasso.with(context).load(image).placeholder(R.drawable.placeholder).into(imLogo);
+            }
+            //imLogo.setImageURI(Uri.parse(organization.getLogoUrl()));
+            tvName.setText(organization.getName());
+            tvDescription.setText(organization.getDescription());
+            tvLocation.setText(organization.getCity() + "," + organization.getCountry());
 
         }
     }
