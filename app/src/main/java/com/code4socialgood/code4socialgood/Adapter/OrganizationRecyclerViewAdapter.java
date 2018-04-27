@@ -14,6 +14,7 @@ import com.code4socialgood.code4socialgood.Activity.OrganizationDetailActivity;
 import com.code4socialgood.code4socialgood.R;
 import com.code4socialgood.code4socialgood.models.Organization;
 import com.code4socialgood.code4socialgood.models.Project;
+import com.code4socialgood.code4socialgood.utilities.Constants;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -97,9 +98,18 @@ public class OrganizationRecyclerViewAdapter extends RecyclerView.Adapter<Organi
             int position = getAdapterPosition();
             if(position != RecyclerView.NO_POSITION){
 
+                Organization organization = organizations.get(position);
                 Context context = view.getContext();
                 Class activityClass = OrganizationDetailActivity.class;
                 Intent startOrganizationDetailActivity = new Intent(context, activityClass);
+                startOrganizationDetailActivity.putExtra(Constants.ORGANIZATION_NAME,organization.getName());
+                startOrganizationDetailActivity.putExtra(Constants.ORGANIZATION_WEBSITE_URL, organization.getWebsiteUrl());
+                startOrganizationDetailActivity.putExtra(Constants.ORGANIZATION_CATEGORY, organization.getCategory());
+                startOrganizationDetailActivity.putExtra(Constants.ORGANIZATION_CITY,organization.getCity());
+                startOrganizationDetailActivity.putExtra(Constants.ORGANIZATION_STATE, organization.getState());
+                startOrganizationDetailActivity.putExtra(Constants.ORGANIZATION_COUNTRY, organization.getCountry());
+                startOrganizationDetailActivity.putExtra(Constants.ORGANIZATION_DESCRIPTION, organization.getDescription());
+                startOrganizationDetailActivity.putExtra(Constants.ORGANIZATION_LOGO_URL, organization.getLogoUrl());
                 context.startActivity(startOrganizationDetailActivity);
             }
         }
