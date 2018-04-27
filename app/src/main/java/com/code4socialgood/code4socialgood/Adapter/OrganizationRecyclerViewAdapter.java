@@ -1,6 +1,7 @@
 package com.code4socialgood.code4socialgood.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.code4socialgood.code4socialgood.Activity.OrganizationDetailActivity;
 import com.code4socialgood.code4socialgood.R;
 import com.code4socialgood.code4socialgood.models.Organization;
 import com.code4socialgood.code4socialgood.models.Project;
@@ -57,7 +59,7 @@ public class OrganizationRecyclerViewAdapter extends RecyclerView.Adapter<Organi
         return organizations.size();
     }
 
-    public class OrganizationViewHolder extends RecyclerView.ViewHolder{
+    public class OrganizationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView imLogo;
         TextView tvName;
@@ -71,6 +73,7 @@ public class OrganizationRecyclerViewAdapter extends RecyclerView.Adapter<Organi
             tvName = (TextView) itemView.findViewById(R.id.tvOrgName);
             tvDescription = (TextView) itemView.findViewById(R.id.tvOrgDescription);
             tvLocation = (TextView) itemView.findViewById(R.id.tvOrgLocation);
+            itemView.setOnClickListener(this);
 
         }
 
@@ -85,6 +88,20 @@ public class OrganizationRecyclerViewAdapter extends RecyclerView.Adapter<Organi
             tvDescription.setText(organization.getDescription());
             tvLocation.setText(organization.getCity() + "," + organization.getCountry());
 
+        }
+
+
+        @Override
+        public void onClick(View view) {
+
+            int position = getAdapterPosition();
+            if(position != RecyclerView.NO_POSITION){
+
+                Context context = view.getContext();
+                Class activityClass = OrganizationDetailActivity.class;
+                Intent startOrganizationDetailActivity = new Intent(context, activityClass);
+                context.startActivity(startOrganizationDetailActivity);
+            }
         }
     }
 }
