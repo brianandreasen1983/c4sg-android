@@ -84,13 +84,29 @@ public class OrganizationRecyclerViewAdapter extends RecyclerView.Adapter<Organi
             if(image!=null && image.length()>0) {
                 Picasso.with(context).load(image).placeholder(R.drawable.placeholder).into(imLogo);
             }
-            //imLogo.setImageURI(Uri.parse(organization.getLogoUrl()));
+
             tvName.setText(organization.getName());
             tvDescription.setText(organization.getDescription());
-            tvLocation.setText(organization.getCity() + "," + organization.getCountry());
 
+            //setting org location
+            String city = organization.getCity();
+            String country = organization.getCountry();
+            String location = "";
+            if(city == null && country==null)
+                location="Unknown";
+            else if(city!=null && country!=null){
+                if(city.equals("null") || city.equals("") && country.equals("null") || country.equals(""))
+                    location="Unknown";
+                else{
+                    location = city;
+                    if(!city.equals(""))
+                        location = location + ",";
+
+                    location = location+country;
+                }
+            }
+            tvLocation.setText(location);
         }
-
 
         @Override
         public void onClick(View view) {

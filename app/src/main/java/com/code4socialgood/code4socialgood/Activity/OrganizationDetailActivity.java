@@ -34,16 +34,17 @@ public class OrganizationDetailActivity extends AppCompatActivity {
         tvOrganizationIntroduction = (TextView) findViewById(R.id.tvOrgDetailIntroduction);
         imOrganizationLogo =(ImageView)findViewById(R.id.imOrgDetailLogo);
 
-
+        //setting image
         Intent intentThatStartedThisActivity = getIntent();
         String image = intentThatStartedThisActivity.getStringExtra(Constants.ORGANIZATION_LOGO_URL);
         if(image!=null && image.length()>0){
-            Picasso.with(this)
-                    .load(image)
-                    .placeholder(R.drawable.placeholder)
-                    .into(imOrganizationLogo);
+            Picasso.with(this).load(image).placeholder(R.drawable.placeholder).into(imOrganizationLogo);
         }
+
+        //setting org name
         tvOrganizationName.setText(intentThatStartedThisActivity.getStringExtra(Constants.ORGANIZATION_NAME));
+
+        //setting org website
         String website = intentThatStartedThisActivity.getStringExtra(Constants.ORGANIZATION_WEBSITE_URL);
         if(website == null)
             tvOrganizationWebsite.setText("Unknown");
@@ -51,6 +52,8 @@ public class OrganizationDetailActivity extends AppCompatActivity {
             tvOrganizationWebsite.setText("Unknown");
         else
             tvOrganizationWebsite.setText(website);
+
+        //setting org category
         String category = intentThatStartedThisActivity.getStringExtra(Constants.ORGANIZATION_CATEGORY);
         if(category.equals("N"))
             tvOrganizationCategory.setText("Non-Profit");
@@ -59,11 +62,11 @@ public class OrganizationDetailActivity extends AppCompatActivity {
         else
             tvOrganizationCategory.setText("Unknown");
 
+        //setting org location
         String city = intentThatStartedThisActivity.getStringExtra(Constants.ORGANIZATION_CITY);
         String state = intentThatStartedThisActivity.getStringExtra(Constants.ORGANIZATION_STATE);
         String country = intentThatStartedThisActivity.getStringExtra(Constants.ORGANIZATION_COUNTRY);
         String location = "";
-
         if(city == null && state == null && country==null)
             location="Unknown";
         else if(city!=null && state!=null&&country!=null){
@@ -79,10 +82,9 @@ public class OrganizationDetailActivity extends AppCompatActivity {
                 location = location+country;
             }
         }
-
-
-
         tvOrganizationLocation.setText( location );
+
+        //setting org description
         tvOrganizationIntroduction.setText(intentThatStartedThisActivity.getStringExtra(Constants.ORGANIZATION_DESCRIPTION));
 
     }
