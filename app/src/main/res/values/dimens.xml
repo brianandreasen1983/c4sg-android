@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin">10dp</dimen>
+    <dimen name="layoutPadding">10dp</dimen>
+    <dimen name="paddingLeft">10dp</dimen>
+    <dimen name="logoWidth">100dp</dimen>
+    <dimen name="logoHeight">100dp</dimen>
+
 </resources>

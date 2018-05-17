@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/layoutPadding"
+    tools:context="com.code4socialgood.code4socialgood.Activity.OrganizationDetailActivity">
+
+    <ImageView
+        android:id="@+id/imOrgDetailLogo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginRight="30dp"
+        android:scaleType="centerCrop"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/placeholder"/>
+
+    <TextView
+        android:id="@+id/tvOrgDetailName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imOrgDetailLogo"
+        android:paddingBottom="10dp"
+        android:textColor="@color/text_color"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Organization Name"/>
+
+    <TextView
+        android:id="@+id/tvOrgDetailWebsiteLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_toRightOf="@+id/imOrgDetailLogo"
+        android:layout_below="@+id/tvOrgDetailName"
+        android:textColor="@color/text_color"
+        android:text="Website: "/>
+
+    <TextView
+        android:id="@+id/tvOrgDetailWebSite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_toRightOf="@+id/tvOrgDetailWebsiteLabel"
+        android:layout_below="@+id/tvOrgDetailName"
+        android:textColor="@color/text_color"
+        android:text="Organization Website"/>
+
+    <TextView
+        android:id="@+id/tvOrgDetailCategoryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_toRightOf="@+id/imOrgDetailLogo"
+        android:layout_below="@+id/tvOrgDetailWebSite"
+        android:textColor="@color/text_color"
+        android:text="Category: "/>
+
+    <TextView
+        android:id="@+id/tvOrgDetailCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_toRightOf="@+id/tvOrgDetailCategoryLabel"
+        android:layout_below="@+id/tvOrgDetailWebSite"
+        android:textColor="@color/text_color"
+        android:text="Organization Category"/>
+
+    <TextView
+        android:id="@+id/tvOrgDetailLocationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_toRightOf="@+id/imOrgDetailLogo"
+        android:layout_below="@+id/tvOrgDetailCategory"
+        android:textColor="@color/text_color"
+        android:text="Location: "/>
+
+    <TextView
+        android:id="@+id/tvOrgDetailLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_toRightOf="@+id/tvOrgDetailLocationLabel"
+        android:layout_below="@+id/tvOrgDetailCategory"
+        android:textColor="@color/text_color"
+        android:text="Organization Location"/>
+
+    <TextView
+        android:id="@+id/tvOrgDetailIntroductionLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@id/tvOrgDetailLocation"
+        android:textColor="@color/text_color"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="Intorduction"/>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/tvOrgDetailIntroductionLabel">
+
+    <TextView
+        android:id="@+id/tvOrgDetailIntroduction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvOrgDetailIntroductionLabel"
+        android:textColor="@color/text_color"
+        android:text="Organization Introduction"/>
+
+</ScrollView>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:padding="@dimen/layoutPadding"
+    >
+
+    <ImageView
+        android:id="@+id/imOrgLogo"
+        android:layout_width="@dimen/logoWidth"
+        android:layout_height="@dimen/logoHeight"
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder"
+        android:layout_alignParentLeft="true"
+        />
+
+    <TextView
+        android:id="@+id/tvOrgName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imOrgLogo"
+        android:text="The People's Fund for Global Health and Development"
+        android:paddingLeft="@dimen/paddingLeft"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_color"
+        android:singleLine="true"
+        android:ellipsize="end"
+        />
+    <TextView
+        android:id="@+id/tvOrgLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvOrgName"
+        android:layout_alignParentRight="true"
+        android:text="Washington,USA"
+        android:textColor="@color/text_color"
+        android:paddingTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tvOrgDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="The People's Fund for Global Health and Development long long long long long long"
+        android:layout_toRightOf="@id/imOrgLogo"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="@dimen/paddingLeft"
+        android:textColor="@color/text_color"
+        android:minLines="2"
+        android:maxLines="2"
+        android:ellipsize="end"
+        />
+
+</RelativeLayout>

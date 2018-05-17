@@ -12,6 +12,36 @@ public class Constants {
 //    public static final String STATE = "state";
 //    public static final String COUNTRY = "country";
 
+    //Organization constants
+    public  static  final String ORGANIZATION_ID ="id";
+    public  static  final String ORGANIZATION_NAME ="name";
+    public  static  final String ORGANIZATION_WEBSITE_URL ="websiteUrl";
+    public  static  final String ORGANIZATION_LOGO_URL ="logoUrl";
+    public  static  final String ORGANIZATION_DESCRIPTION="description";
+    public  static  final String ORGANIZATION_ADDRESS1="address1";
+    public  static  final String ORGANIZATION_ADDRESS2="address2";
+    public  static  final String ORGANIZATION_CITY="city";
+    public  static  final String ORGANIZATION_ZIP="zip";
+    public  static  final String ORGANIZATION_STATE="state";
+    public  static  final String ORGANIZATION_COUNTRY="country";
+    public  static  final String ORGANIZATION_CATEGORY="category";
+    public  static  final String ORGANIZATION_EIN="ein";
+    public  static  final String ORGANIZATION_STATUS="status";
+    public  static  final String ORGANIZATION_LONGITUDE="longitude";
+    public  static  final String ORGANIZATION_LATTITUDE="lattitude";
+    public  static  final String ORGANIZATION_FACEBOOK_URL="facebook_url";
+    public  static  final String ORGANIZATION_TWITTER_URL="twitter_url";
+    public  static  final String ORGANIZATION_LINKEDIN_URL="linkedin_url";
+    public  static  final String ORGANIZATION_CREATED_TIME="createdTime";
+    public  static  final String ORGANIZATION_PROJECT_UPDATED_TIME="projectUpdatedTime";
+    public  static  final String ORGANIZATION_CONTACT_NAME="contactName";
+    public  static  final String ORGANIZATION_CONTACT_TITLE="contactTitle";
+    public  static  final String ORGANIZATION_CONTACT_PHONE="contactPhone";
+    public  static  final String ORGANIZATION_CONTACT_EMAIL="contactEmail";
+
+
+
+
     /*
     Project Constants
      */
