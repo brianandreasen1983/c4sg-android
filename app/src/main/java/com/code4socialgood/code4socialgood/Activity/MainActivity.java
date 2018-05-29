@@ -1,4 +1,4 @@
-package com.code4socialgood.code4socialgood;
+package com.code4socialgood.code4socialgood.Activity;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.code4socialgood.code4socialgood.Adapter.OrganizationRecyclerViewAdapter;
 import com.code4socialgood.code4socialgood.Adapter.ProjectRecyclerViewAdapter;
 import com.code4socialgood.code4socialgood.Adapter.VolunteerRecyclerViewAdapter;
+import com.code4socialgood.code4socialgood.R;
 import com.code4socialgood.code4socialgood.models.Organization;
 import com.code4socialgood.code4socialgood.models.Project;
 import com.code4socialgood.code4socialgood.models.Skill;

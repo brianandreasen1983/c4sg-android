@@ -17,4 +17,11 @@
     <string name="title_label">Title:</string>
     <string name="introduction_label">Introduction:</string>
     <string name="image_logo">image</string>
+    <string name="title_activity_c4sg__main_">c4sg_Main_Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="tab_text_1">Volunteers</string>
+    <string name="tab_text_2">Projects</string>
+    <string name="tab_text_3">Organizations</string>
 </resources>

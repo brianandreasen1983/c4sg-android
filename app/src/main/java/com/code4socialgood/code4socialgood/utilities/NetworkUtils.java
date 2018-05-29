@@ -4,17 +4,8 @@ package com.code4socialgood.code4socialgood.utilities;
  * Created by Brian Andreasen on 1/16/2018.
  */
 
-import android.app.AlertDialog;
-import android.app.Service;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkInfo;
 import android.net.Uri;
-import android.widget.ProgressBar;
-
-import com.code4socialgood.code4socialgood.MainActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
